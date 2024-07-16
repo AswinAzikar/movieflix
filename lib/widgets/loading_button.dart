@@ -31,8 +31,7 @@ class LoadingButtonV2 extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget button = ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundColor,
-      ),
+          backgroundColor: backgroundColor, foregroundColor: textColor),
       onPressed: buttonLoading ? null : onPressed,
       child: Builder(builder: (context) {
         if (buttonLoading) return const CircularProgressIndicator();

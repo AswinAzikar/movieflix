@@ -46,7 +46,9 @@ mixin GoogleOauthMixin<T extends StatefulWidget> on State<T> {
 
       FirebaseAuth.instance.signInWithCredential(credential);
       makeButtonNotLoading();
-      SharedPreferencesService.i.setValue(value: "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNDI2YWMwZDZkMzRhZjExN2JlYjQzYzI2M2I4ZDJlZCIsIm5iZiI6MTcyMTAxNTI4MS42NDYyNTYsInN1YiI6IjY2OGQwM2E0MmU3NzFlODg3MTBkMWFkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pTXg_JJP_zKHx1BKVmd1YBjzX3q8pfmmfFkpA9Ap56k");
+      SharedPreferencesService.i.setValue(
+          value:
+              "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNDI2YWMwZDZkMzRhZjExN2JlYjQzYzI2M2I4ZDJlZCIsIm5iZiI6MTcyMTAxNTI4MS42NDYyNTYsInN1YiI6IjY2OGQwM2E0MmU3NzFlODg3MTBkMWFkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pTXg_JJP_zKHx1BKVmd1YBjzX3q8pfmmfFkpA9Ap56k");
       Navigator.pushNamedAndRemoveUntil(
           context, SplashScreen.path, (route) => false);
     } catch (error) {
