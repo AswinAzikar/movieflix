@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:io';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
@@ -30,15 +29,15 @@ class PhoneAuthInterceptor extends Interceptor {
     String token = SharedPreferencesService.i.getValue();
     if (token != "") {
       options.headers.addAll({
-        "Authorization": "Token $token",
+        "Authorization": "Bearer $token",
       });
     }
-    options.headers.addAll(
-      {
-        "X-App-Source": "Student",
-        "User-Agent": Platform.isAndroid ? "ANDROID" : "IOS",
-      },
-    );
+    // options.headers.addAll(
+    //   {
+    //     "X-App-Source": "Student",
+    //     "User-Agent": Platform.isAndroid ? "ANDROID" : "IOS",
+    //   },
+    // );
     super.onRequest(options, handler);
   }
 

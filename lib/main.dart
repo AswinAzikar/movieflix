@@ -1,7 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -26,15 +25,6 @@ mainCommon() async {
   if (kIsWeb) {
     usePathUrlStrategy();
   }
-  FirebaseAuth.instance.userChanges().listen((user) async {
-    if (user == null) {
-      SharedPreferencesService.i.clear();
-    } else {
-      SharedPreferencesService.i.setValue(
-          value:
-              await FirebaseAuth.instance.currentUser?.getIdToken(true) ?? "");
-    }
-  });
 
   // Setup crashletics
   if (!kIsWeb) {

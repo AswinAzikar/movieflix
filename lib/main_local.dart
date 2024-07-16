@@ -6,11 +6,15 @@ import 'main.dart';
 class AppConfigLocal extends AppConfig {
   @override
   // TODO: implement domain
-  String get domain => throw UnimplementedError();
+  String get domain => "api.themoviedb.org";
+
+
+
+
 
   @override
   // TODO: implement slugUrl
-  String get slugUrl => throw UnimplementedError();
+  String get slugUrl =>'/3/';
   
   @override
   // TODO: implement privacyPolicy
@@ -26,11 +30,11 @@ class AppConfigLocal extends AppConfig {
   
   @override
   // TODO: implement port
-  String get port => throw UnimplementedError();
+  String get port => '';
   
   @override
   // TODO: implement scheme
-  String get scheme => throw UnimplementedError();
+  String get scheme => 'https';
 }
 
 void main() async {

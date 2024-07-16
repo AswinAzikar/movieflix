@@ -6,7 +6,7 @@ import 'package:movieflix/features/authentication/social_authentication/social_a
 import '../constants.dart';
 import '../features/authentication/landing_screen/landing_screen.dart';
 import '../features/authentication/phone_auth/phone_auth_screen.dart';
-import '../features/home_screen/home_screen.dart';
+import '../features/home_screen/home.dart';
 import '../features/splash_screen/splash_screen.dart';
 import '../services/shared_preferences_services.dart';
 import 'logger.dart';

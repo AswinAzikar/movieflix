@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:movieflix/features/authentication/social_authentication/social_authentication_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../core/app_config.dart';
@@ -8,7 +9,6 @@ import '../../exporter.dart';
 import '../../main.dart';
 import '../../services/shared_preferences_services.dart';
 import '../../widgets/loading_button.dart';
-import '../authentication/phone_auth/phone_auth_screen.dart';
 import '../web_view/web_view_screen.dart';
 import 'profile_details_model.dart';
 
@@ -89,8 +89,8 @@ void showPrivacyPolicy() {
 }
 
 void signOut(context) {
-  SharedPreferencesService.i.setValue(value: "");
+  SharedPreferencesService.i.clear();
   FirebaseAuth.instance.signOut();
   Navigator.pushNamedAndRemoveUntil(
-      context, PhoneVerification.path, (route) => false);
+      context, SocialAuthenticationScreen.path, (route) => false);
 }

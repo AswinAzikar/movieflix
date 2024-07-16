@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../exporter.dart';
 import '../../widgets/error_widget_with_retry.dart';
 import '../../widgets/network_resource.dart';
-import '../home_screen/home_screen.dart';
+import '../home_screen/home.dart';
 import 'models/registration_state.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -40,10 +40,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     width: 140,
                     height: 140,
                     decoration: const BoxDecoration(
-                      color: Colors.black,
-                      shape: BoxShape.circle,
+                      // color: Colors.black,
+                      // shape: BoxShape.circle,
                     ),
-                    child: const Placeholder())
+                    child: Image.asset("assets/appicon/icon.png"))
                 .animate()
                 .scaleXY(
                   begin: 1.5,
@@ -82,9 +82,9 @@ class _SplashScreenState extends State<SplashScreen> {
           //     context, ProgramSelectionForm.path, (route) => false);
           // break;
           case RegistrationState.completed:
-          Navigator.pushNamedAndRemoveUntil(
-              context, HomeScreen.path, (route) => false);
-          break;
+            Navigator.pushNamedAndRemoveUntil(
+                context, HomeScreen.path, (route) => false);
+            break;
         }
       });
     });
