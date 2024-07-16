@@ -12,7 +12,7 @@ class LoadingButtonV2 extends StatelessWidget {
     required this.onPressed,
     this.enabled = true,
     this.expanded = true,
-    this.textColor = Colors.white,
+    this.textColor = Colors.red,
     this.backgroundColor = primaryColor,
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
   });

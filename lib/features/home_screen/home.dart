@@ -5,13 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movieflix/core/repository.dart';
 
-
 import '../../widgets/horizontal_slider_with_title.dart';
 import '../Details Screen /DetailScreen.dart';
 import 'models/datamodel.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const String  path = "/home-screen";
+  static const String path = "/home-screen";
 
   const HomeScreen({super.key});
 
@@ -43,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+          onPressed: () {},
           // onPressed: () {
           //   Navigator.of(context).push(MaterialPageRoute(
           //     builder: (context) =>Searchscreen(),
@@ -57,9 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
-          "MOVIEFLIX",
-          style: GoogleFonts.anton(color: Colors.red, fontSize: 40),
+        title: Image.asset(
+          "assets/appicon/logo.png",
+          height: 140,
+          width: 140,
         ),
         centerTitle: true,
       ),
@@ -130,8 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         fit: BoxFit.cover,
                                         placeholder: (context, url) =>
                                             const Center(
-                                                child:
-                                                    CircularProgressIndicator(),),
+                                          child: CircularProgressIndicator(),
+                                        ),
                                         errorWidget: (context, url, error) =>
                                             const Icon(Icons.error),
                                       ),
@@ -152,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                 SizedBox(height: .05 * screenHeight),
-                 const HorizontalSliderWithTitle(
+                const HorizontalSliderWithTitle(
                   title: "Now Playing",
                 ),
                 SizedBox(height: .05 * screenHeight),
