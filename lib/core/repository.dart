@@ -114,4 +114,6 @@ class DataRepository with ErrorExceptionHandler {
       throw handleError(e);
     }
   }
+
+  searchMovies(String query) {}
 }

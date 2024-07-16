@@ -2,8 +2,9 @@ import 'dart:core';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:movieflix/core/repository.dart';
+import 'package:movieflix/features/searhScreen/search_screen.dart';
 
 import '../../widgets/horizontal_slider_with_title.dart';
 import '../Details Screen /DetailScreen.dart';
@@ -42,12 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          // onPressed: () {
-          //   Navigator.of(context).push(MaterialPageRoute(
-          //     builder: (context) =>Searchscreen(),
-          //   ));
-          // },
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => SearchScreen(),
+            ));
+          },
           backgroundColor: const Color.fromARGB(255, 46, 45, 45),
           child: const Icon(
             Icons.search,

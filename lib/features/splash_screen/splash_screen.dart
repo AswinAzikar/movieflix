@@ -40,10 +40,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     width: 140,
                     height: 140,
                     decoration: const BoxDecoration(
-                      // color: Colors.black,
-                      // shape: BoxShape.circle,
-                    ),
-                    child: Image.asset("assets/appicon/icon.png"))
+                        // color: Colors.black,
+                        // shape: BoxShape.circle,
+                        ),
+                    child: Image.asset("assets/appicon/logo.png"))
                 .animate()
                 .scaleXY(
                   begin: 1.5,
