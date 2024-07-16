@@ -8,4 +8,5 @@ class APIConstants {
   static String topRatedMovies = "movie/top_rated";
   static String upComingMovies = "movie/upcoming";
   static String genre = "genre/movie/list";
+  static String search = "search/movie";
 }

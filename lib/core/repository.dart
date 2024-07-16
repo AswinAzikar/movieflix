@@ -114,6 +114,26 @@ class DataRepository with ErrorExceptionHandler {
       throw handleError(e);
     }
   }
+  Future<List<Result>> searchMovies( String query) async {
+    logError(query);
+ 
 
-  searchMovies(String query) {}
+ String Attach  = APIConstants.search + "$query";
+    try {
+      var response = await _client.get(Attach, queryParameters: {
+        "language": "en-US",
+     
+      });
+
+      if (response.statusCode == 200) {
+        ModelClass modelClass = ModelClass.fromJson(response.data);
+        return modelClass.results!;
+      } else {
+        throw Exception('Failed to load $query');
+      }
+    } catch (e) {
+      print(e);
+      throw Exception('Failed to load $query (catch)');
+    }
+  }
 }
