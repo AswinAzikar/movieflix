@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 mixin SearchMixin {
-  Duration debouneDuration = const Duration(milliseconds: 500);
+  Duration debouneDuration = const Duration(milliseconds: 300);
   Timer? debouncer;
 
   final searchController = TextEditingController();

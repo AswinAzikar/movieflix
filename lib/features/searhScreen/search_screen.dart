@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:movieflix/core/repository.dart';
-
-import '../Details Screen /DetailScreen.dart';
+import 'package:movieflix/exporter.dart';
+import 'package:movieflix/mixins/search_mixin.dart';
+import 'package:movieflix/widgets/vertical_slider.dart';
 import '../home_screen/models/datamodel.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -15,39 +15,37 @@ class SearchScreen extends StatefulWidget {
   _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
-  final TextEditingController _searchController = TextEditingController();
-  List<Result> _searchResults = [];
-
+class _SearchScreenState extends State<SearchScreen> with SearchMixin {
+  final PagingController<int, Result> pagingController =
+      PagingController(firstPageKey: 1);
   @override
   void initState() {
     super.initState();
-    _searchController.addListener(_onSearchChanged);
+    addSearchListener(() {
+      pagingController.refresh();
+    });
+    pagingController.addPageRequestListener(
+      (pageKey) {
+        _searchMovies(searchController.text, pageKey);
+      },
+    );
   }
 
   @override
   void dispose() {
-    _searchController.dispose();
+    removeSearchListener();
     super.dispose();
   }
 
-  void _onSearchChanged() {
-    if (_searchController.text.isNotEmpty) {
-      _searchMovies(_searchController.text);
-    } else {
-      setState(() {
-        _searchResults = [];
-      });
-    }
-  }
+  Future<void> _searchMovies(String query, int pageKey) async {
+    final items = await DataRepository.i.searchMovies(query, pageKey);
 
-  void _searchMovies(String query) async {
-    // Call your API to search for movies
-    // For demonstration purposes, I'll use a dummy data
-    List<Result> results = await DataRepository.i.searchMovies(query);
-    setState(() {
-      _searchResults = results;
-    });
+    if (items.length != 20) {
+      pagingController.appendLastPage(items);
+      logError("succcess last page");
+    } else {
+      pagingController.appendPage(items, pageKey + 1);
+    }
   }
 
   @override
@@ -68,49 +66,15 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           children: [
             TextField(
-              controller: _searchController,
+              controller: searchController,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 labelText: "Search for a movie or TV show",
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
-            _searchResults.isEmpty
-                ? Center(child: Text("No results found"))
-                : GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 3 / 4,
-                    ),
-                    itemCount: _searchResults.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (ctx) => DetailScreen(
-                              result: _searchResults[index],
-                            ),
-                          ),
-                        ),
-                        child: Card(
-                          child: Column(
-                            children: [
-                              CachedNetworkImage(
-                                imageUrl:
-                                    'https://image.tmdb.org/t/p/w300${_searchResults[index].posterPath}',
-                                fit: BoxFit.cover,
-                              ),
-                              Text(
-                                _searchResults[index].title!,
-                                style: GoogleFonts.openSans(fontSize: 16),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+            // SizedBox(height: 16),
+            Expanded(child: VerticalSlider(pagingController: pagingController))
           ],
         ),
       ),

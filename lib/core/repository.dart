@@ -114,15 +114,15 @@ class DataRepository with ErrorExceptionHandler {
       throw handleError(e);
     }
   }
-  Future<List<Result>> searchMovies( String query) async {
-    logError(query);
- 
 
- String Attach  = APIConstants.search + "$query";
+  Future<List<Result>> searchMovies(String query, int pagekey) async {
+    logError(query);
+
     try {
-      var response = await _client.get(Attach, queryParameters: {
-        "language": "en-US",
-     
+      var response = await _client.get(APIConstants.search, queryParameters: {
+        // "language": "en-US",
+         "query": query,
+        // "page": pagekey
       });
 
       if (response.statusCode == 200) {
