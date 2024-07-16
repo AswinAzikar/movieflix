@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context) => SearchScreen(),
             ));
           },
-          backgroundColor: const Color.fromARGB(255, 46, 45, 45),
+          backgroundColor: Colors.white,
           child: const Icon(
             Icons.search,
             color: Colors.red,
