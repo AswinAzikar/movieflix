@@ -22,6 +22,7 @@ class _SearchScreenState extends State<SearchScreen> with SearchMixin {
   void initState() {
     super.initState();
     addSearchListener(() {
+      pagingController.value = PagingState();
       pagingController.refresh();
     });
     pagingController.addPageRequestListener(
