@@ -75,8 +75,8 @@ class _VerticalSliderState extends State<VerticalSlider> {
         },
         noItemsFoundIndicatorBuilder: (context) =>
             const Center(child: Text('No movies found')),
-        firstPageErrorIndicatorBuilder: (context) =>
-            const Center(child: Text('Error loading movies. Please try again')),
+        // firstPageErrorIndicatorBuilder: (context) =>
+        //     const Center(child: Text('Error loading movies. Please try again')),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'core/app_config.dart';
@@ -38,7 +39,7 @@ class AppConfigLocal extends AppConfig {
 }
 
 void main() async {
-  await mainCommon();
   appConfig = AppConfigLocal();
+  await mainCommon();
   runApp(const MyApp());
 }

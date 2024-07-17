@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movieflix/core/firestore_service.dart';
+import 'package:movieflix/exporter.dart';
+import 'package:movieflix/widgets/watchlistbutton.dart';
 
 import '../../widgets/chip_labels.dart';
 import '../home_screen/models/datamodel.dart';
@@ -17,10 +20,34 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   final ScrollController _scrollController = ScrollController();
+  bool _isInwatchList = false;
+  bool _isInwatchedList = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    FirestoreService.checkInWatchList(widget.result.id!).then(
+      (value) {
+        _isInwatchList = value;
+        _isInwatchedList = false;
+        setState(() {});
+      },
+    );
+    FirestoreService.checkInWatchedList(widget.result.id!).then(
+      (value) {
+        _isInwatchedList = value;
+        _isInwatchList = false;
+        setState(() {});
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.height;
+    print(_isInwatchList);
     return Scaffold(
       body: Stack(
         children: [
@@ -130,23 +157,68 @@ class _DetailScreenState extends State<DetailScreen> {
                       GenreChipsWidget(genreIds: widget.result.genreIds ?? []),
                       SizedBox(height: 0.04 * screenHeight),
                       Row(
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(Icons.favorite),
-                            onPressed: () {
-                              // Handle onPressed event
-                            },
-                          ),
-                          SizedBox(width: 8), // Adjust spacing as needed
-                          Text(
-                            'Add to watchlist',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Builder(builder: (context) {
+                            if (_isInwatchList) {
+                              return TextButton.icon(
+                                onPressed: () {},
+                                label: Text(
+                                  "Added to watch list",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                icon: Icon(Icons.done, color: Colors.green),
+                              );
+                            }
+                            return WatchlistButton(
+                                icon: Icons.favorite,
+                                text: 'Add to watch list',
+                                onPressed: () {
+                                  FirestoreService.addMovieToWatchlist(
+                                          widget.result)
+                                      .then(
+                                    (value) {
+                                      logSuccess(value);
+                                      setState(() {
+                                        _isInwatchList = true;
+                                        _isInwatchedList = false;
+                                      });
+                                    },
+                                  );
+                                });
+                          }),
+                          SizedBox(width: 0.01 * screenWidth),
+                          Builder(builder: (context) {
+                            if (_isInwatchedList) {
+                              return TextButton.icon(
+                                onPressed: () {},
+                                label: Text(
+                                  "Added to watched list",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                icon: Icon(Icons.done, color: Colors.green),
+                              );
+                            }
+                            return WatchlistButton(
+                                icon: Icons.visibility,
+                                text: 'Add to watched list',
+                                onPressed: () {
+                                  FirestoreService.addMovieToWatchedlist(
+                                          widget.result)
+                                      .then(
+                                    (value) {
+                                      logSuccess(value);
+                                      setState(() {
+                                        _isInwatchedList = true;
+                                        _isInwatchList = false;
+                                      });
+                                    },
+                                  );
+                                });
+                          })
                         ],
                       ),
+                      SizedBox(height: 0.04 * screenHeight),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

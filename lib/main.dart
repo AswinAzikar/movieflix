@@ -21,6 +21,7 @@ mainCommon() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await SharedPreferencesService.i.initialize();
   if (kIsWeb) {
     usePathUrlStrategy();

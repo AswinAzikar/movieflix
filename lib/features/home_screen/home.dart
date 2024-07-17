@@ -108,17 +108,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.done, color: Colors.red),
-                title: const Text("Watched",
+                leading: const Icon(Icons.remove_red_eye, color: Colors.red),
+                title: const Text("Watched list",
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   Navigator.of(context).pop();
                 },
               ),
               ListTile(
-                leading:
-                    const Icon(Icons.bookmark_add_outlined, color: Colors.red),
-                title: const Text("To be Watched",
+                leading: const Icon(Icons.favorite, color: Colors.red),
+                title: const Text("Watch list",
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   Navigator.of(context).pop();

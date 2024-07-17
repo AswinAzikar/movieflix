@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 ModelClass modelClassFromJson(String str) =>
@@ -27,7 +28,7 @@ class ModelClass {
 }
 
 class Result {
-  final String? backdropPath; 
+  final String? backdropPath;
   final int? id;
   final String? title;
   final String? originalTitle;
@@ -86,6 +87,26 @@ class Result {
         voteAverage: json["vote_average"]?.toDouble(),
         voteCount: json["vote_count"],
       );
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'backdropPath': backdropPath,
+      'id': id,
+      'title': title,
+      'originalTitle': originalTitle,
+      'overview': overview,
+      'posterPath': posterPath,
+      'mediaType': mediaType.toString(),
+      'adult': adult,
+      'originalLanguage': originalLanguage.toString(),
+      'genreIds': genreIds,
+      'popularity': popularity,
+      'releaseDate': releaseDate?.millisecondsSinceEpoch,
+      'video': video,
+      'voteAverage': voteAverage,
+      'voteCount': voteCount,
+    };
+  }
 }
 
 enum MediaType { MOVIE }
