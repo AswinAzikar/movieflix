@@ -1,19 +1,19 @@
-import 'dart:core';
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
-
+import 'package:get/route_manager.dart';
 import 'package:movieflix/core/repository.dart';
-import 'package:movieflix/features/searhScreen/search_screen.dart';
-
 import '../../widgets/horizontal_slider_with_title.dart';
 import '../Details Screen /DetailScreen.dart';
+import '../searhScreen/search_screen.dart';
 import 'models/datamodel.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String path = "/home-screen";
 
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -42,17 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => SearchScreen(),
-            ));
-          },
-          backgroundColor: Colors.white,
-          child: const Icon(
-            Icons.search,
-            color: Colors.red,
-          )),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -62,6 +51,108 @@ class _HomeScreenState extends State<HomeScreen> {
           width: 140,
         ),
         centerTitle: true,
+      ),
+      drawer: Drawer(
+        elevation: 2,
+        backgroundColor: Colors.transparent,
+        child: Container(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Stack(
+                  children: [
+                    BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      child: const SizedBox(
+                        height: double.infinity,
+                        width: double.infinity,
+                      ),
+                    ),
+                    Image.asset(
+                      "assets/appicon/logo.png",
+                      height: 80,
+                      width: 80,
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      "MovieFlix",
+                      style: TextStyle(
+                        color: Colors.transparent,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.home,
+                  color: Colors.red,
+                ),
+                title:
+                    const Text("Home", style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  Navigator.pop(context); // Close the drawer
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.search, color: Colors.red),
+                title:
+                    const Text("Search", style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const SearchScreen(),
+                  ));
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.done, color: Colors.red),
+                title: const Text("Watched",
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading:
+                    const Icon(Icons.bookmark_add_outlined, color: Colors.red),
+                title: const Text("To be Watched",
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.movie, color: Colors.red),
+                title:
+                    const Text("Movies", style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ));
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.tv, color: Colors.red),
+                title: const Text("TV Shows",
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Navigate to TV shows screen
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.settings, color: Colors.red),
+                title: const Text("Settings",
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Navigate to settings screen
+                },
+              ),
+            ],
+          ),
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: () async {
@@ -151,18 +242,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                         ),
                       ),
-                SizedBox(height: .05 * screenHeight),
+                SizedBox(height: 0.05 * screenHeight),
                 const HorizontalSliderWithTitle(
                   title: "Now Playing",
                 ),
-                SizedBox(height: .05 * screenHeight),
+                SizedBox(height: 0.05 * screenHeight),
                 const HorizontalSliderWithTitle(
                   title: "Top Rated Movies",
                 ),
                 const HorizontalSliderWithTitle(
                   title: "Upcoming Movies",
                 ),
-                SizedBox(height: .05 * screenHeight),
+                SizedBox(height: 0.05 * screenHeight),
               ],
             ),
           );
@@ -181,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     ).onError(
       (error, stackTrace) {
-        /// set error
+        // Handle error
       },
     );
   }

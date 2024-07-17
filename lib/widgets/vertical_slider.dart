@@ -1,11 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:movieflix/core/repository.dart';
+import 'package:movieflix/features/home_screen/models/datamodel.dart';
 
 import '../features/Details Screen /DetailScreen.dart';
-import '../features/home_screen/models/datamodel.dart';
 
 class VerticalSlider extends StatefulWidget {
   const VerticalSlider({
@@ -22,7 +20,7 @@ class _VerticalSliderState extends State<VerticalSlider> {
   @override
   Widget build(BuildContext context) {
     return PagedGridView<int, Result>(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 3 / 4,
       ),
@@ -30,13 +28,17 @@ class _VerticalSliderState extends State<VerticalSlider> {
       pagingController: widget.pagingController,
       builderDelegate: PagedChildBuilderDelegate<Result>(
         itemBuilder: (context, item, index) {
-          final imageUrl = 'https://image.tmdb.org/t/p/w500${item.posterPath}';
+          final imageUrl = item.backdropPath != null
+              ? 'https://image.tmdb.org/t/p/w500${item.backdropPath}'
+              : null;
           return GestureDetector(
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DetailScreen(result: item)));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailScreen(result: item),
+                ),
+              );
             },
             child: AspectRatio(
               aspectRatio: .7,
@@ -47,23 +49,34 @@ class _VerticalSliderState extends State<VerticalSlider> {
                       padding: const EdgeInsets.all(8),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(18),
-                        child: CachedNetworkImage(
-                          imageUrl: imageUrl,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                        ),
+                        child: imageUrl != null
+                            ? CachedNetworkImage(
+                                imageUrl: imageUrl,
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) => const Center(
+                                    child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              )
+                            : Container(
+                                color: Colors.grey,
+                                child: const Center(
+                                  child: Icon(Icons.image_not_supported),
+                                ),
+                              ), // Placeholder widget
                       ),
                     ),
                   ),
-                  Text(item.title ?? "")
+                  Text(item.title ?? 'No Title')
                 ],
               ),
             ),
           );
         },
+        noItemsFoundIndicatorBuilder: (context) =>
+            const Center(child: Text('No movies found')),
+        firstPageErrorIndicatorBuilder: (context) =>
+            const Center(child: Text('Error loading movies. Please try again')),
       ),
     );
   }

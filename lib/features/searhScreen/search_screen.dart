@@ -18,6 +18,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> with SearchMixin {
   final PagingController<int, Result> pagingController =
       PagingController(firstPageKey: 1);
+
   @override
   void initState() {
     super.initState();
@@ -35,19 +36,37 @@ class _SearchScreenState extends State<SearchScreen> with SearchMixin {
   @override
   void dispose() {
     removeSearchListener();
+    pagingController.dispose();
     super.dispose();
   }
 
   Future<void> _searchMovies(String query, int pageKey) async {
-    final items = await DataRepository.i.searchMovies(query, pageKey);
+    try {
+      final items = await DataRepository.i.searchMovies(query, pageKey);
 
-    if (items.length != 20) {
-      pagingController.appendLastPage(items);
-      logError("succcess last page");
-    } else {
-      pagingController.appendPage(items, pageKey + 1);
+      // Filter out items with null backdrop_path
+      final filteredItems =
+          items.where((item) => item.backdropPath != null).toList();
+
+      // Log details about the filtered items
+      for (var item in filteredItems) {
+        print('Movie: ${item.title}, BackdropPath: ${item.backdropPath}');
+      }
+
+      if (filteredItems.length < 20) {
+        pagingController.appendLastPage(filteredItems);
+        logError("Success: last page");
+      } else {
+        pagingController.appendPage(filteredItems, pageKey + 1);
+      }
+    } catch (error) {
+      logError('Error fetching movies: $error');
+      pagingController.error = error;
     }
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {

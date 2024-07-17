@@ -20,16 +20,14 @@ class ModelClass {
         page: json["page"],
         results: json["results"] == null
             ? []
-            : List<Result>.from(json["results"]!
-                .map((x) => x == null ? null : Result.fromJson(x))
-                .where((x) => x != null)),
+            : List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
         totalPages: json["total_pages"],
         totalResults: json["total_results"],
       );
 }
 
 class Result {
-  final String? backdropPath;
+  final String? backdropPath; 
   final int? id;
   final String? title;
   final String? originalTitle;
@@ -64,18 +62,22 @@ class Result {
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-        backdropPath: json["backdrop_path"],
+        backdropPath: json["backdrop_path"], // Accepting null value directly
         id: json["id"],
         title: json["title"],
         originalTitle: json["original_title"],
         overview: json["overview"],
         posterPath: json["poster_path"],
-        mediaType: mediaTypeValues.map[json["media_type"]],
+        mediaType: json["media_type"] == null
+            ? null
+            : mediaTypeValues.map[json["media_type"]],
         adult: json["adult"],
-        originalLanguage: originalLanguageValues.map[json["original_language"]],
+        originalLanguage: json["original_language"] == null
+            ? null
+            : originalLanguageValues.map[json["original_language"]],
         genreIds: json["genre_ids"] == null
             ? []
-            : List<int>.from(json["genre_ids"]!.map((x) => x)),
+            : List<int>.from(json["genre_ids"].map((x) => x)),
         popularity: json["popularity"]?.toDouble(),
         releaseDate: json["release_date"] == null
             ? null
@@ -100,12 +102,11 @@ final originalLanguageValues = EnumValues({
 
 class EnumValues<T> {
   Map<String, T> map;
-  late Map<T, String> reverseMap;
+  Map<T, String>? reverseMap;
 
   EnumValues(this.map);
 
   Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
+    return reverseMap ??= map.map((k, v) => MapEntry(v, k));
   }
 }

@@ -130,6 +130,24 @@ class _DetailScreenState extends State<DetailScreen> {
                       GenreChipsWidget(genreIds: widget.result.genreIds ?? []),
                       SizedBox(height: 0.04 * screenHeight),
                       Row(
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(Icons.favorite),
+                            onPressed: () {
+                              // Handle onPressed event
+                            },
+                          ),
+                          SizedBox(width: 8), // Adjust spacing as needed
+                          Text(
+                            'Add to watchlist',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
