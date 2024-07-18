@@ -8,6 +8,7 @@ import '../features/authentication/landing_screen/landing_screen.dart';
 import '../features/authentication/phone_auth/phone_auth_screen.dart';
 import '../features/home_screen/home.dart';
 import '../features/splash_screen/splash_screen.dart';
+import '../features/watch_ list_screen/watch_list.dart';
 import '../services/shared_preferences_services.dart';
 import 'logger.dart';
 
@@ -45,6 +46,13 @@ class AppRoute {
       case SocialAuthenticationScreen.path:
         screen = const SocialAuthenticationScreen();
         break;
+
+ 
+      case WatchList.path:
+        screen = const WatchList();
+        break;
+     
+
       default:
         return null;
     }

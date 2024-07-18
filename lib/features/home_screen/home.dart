@@ -3,11 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:get/route_manager.dart';
+
 import 'package:movieflix/core/repository.dart';
 import '../../widgets/horizontal_slider_with_title.dart';
 import '../Details Screen /DetailScreen.dart';
 import '../searhScreen/search_screen.dart';
+import '../watch_ list_screen/watch_list.dart';
 import 'models/datamodel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -102,25 +103,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 title:
                     const Text("Search", style: TextStyle(color: Colors.white)),
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const SearchScreen(),
-                  ));
+                  Navigator.pushNamed(context, SearchScreen.path);
                 },
               ),
               ListTile(
                 leading: const Icon(Icons.remove_red_eye, color: Colors.red),
                 title: const Text("Watched list",
                     style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
+                onTap: () {},
               ),
               ListTile(
                 leading: const Icon(Icons.favorite, color: Colors.red),
                 title: const Text("Watch list",
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
-                  Navigator.of(context).pop();
+                  Navigator.pushNamed(context, WatchList.path);
                 },
               ),
               ListTile(
@@ -128,9 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title:
                     const Text("Movies", style: TextStyle(color: Colors.white)),
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const HomeScreen(),
-                  ));
+                  Navigator.pushNamed(context, HomeScreen.path);
                 },
               ),
               ListTile(
