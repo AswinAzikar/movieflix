@@ -90,21 +90,21 @@ class Result {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'backdropPath': backdropPath,
+      'backdrop_path': backdropPath,
       'id': id,
       'title': title,
-      'originalTitle': originalTitle,
+      'original_title': originalTitle,
       'overview': overview,
-      'posterPath': posterPath,
+      'poster_path': posterPath,
       'mediaType': mediaType.toString(),
       'adult': adult,
-      'originalLanguage': originalLanguage.toString(),
-      'genreIds': genreIds,
+      'original_language': originalLanguage.toString(),
+      'genre_ids': genreIds,
       'popularity': popularity,
-      'releaseDate': releaseDate?.millisecondsSinceEpoch,
+      'release_date': releaseDate?.toIso8601String(),
       'video': video,
-      'voteAverage': voteAverage,
-      'voteCount': voteCount,
+      'vote_average': voteAverage,
+      'vote_count': voteCount,
     };
   }
 }

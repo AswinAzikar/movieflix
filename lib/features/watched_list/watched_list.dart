@@ -4,23 +4,23 @@ import 'package:movieflix/core/firestore_service.dart';
 import '../../widgets/moviecard.dart';
 import '../home_screen/models/datamodel.dart';
 
-class WatchList extends StatefulWidget {
-  static const String path = "/Watch_List";
+class WatchedList extends StatefulWidget {
+  static const String path = "/Watched_List";
 
-  const WatchList({Key? key}) : super(key: key);
+  const WatchedList({super.key});
 
   @override
-  State<WatchList> createState() => _WatchListState();
+  State<WatchedList> createState() => _WatchedListState();
 }
 
-class _WatchListState extends State<WatchList> {
+class _WatchedListState extends State<WatchedList> {
   static const _pageSize = 10;
   final PagingController<int, Result> _pagingController =
       PagingController(firstPageKey: 1);
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final newItems = await FirestoreService.gatherMoviesForWatchListPage(
+      final newItems = await FirestoreService.gatherMoviesForWatchedListPage(
           pageKey, _pageSize);
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
@@ -45,15 +45,19 @@ class _WatchListState extends State<WatchList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Watch List'),
+        title: const Text('Watched List'),
         elevation: 0,
         backgroundColor: Colors.black,
       ),
       body: PagedListView<int, Result>(
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Result>(
-          itemBuilder: (context, item, index) => MovieCard(movie: item,collection: 'watchlist',),
+          itemBuilder: (context, item, index) => MovieCard(
+            movie: item,
+            collection: 'watchedlist',
+          ),
         ),
         scrollDirection: Axis.vertical,
       ),

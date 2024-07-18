@@ -9,6 +9,7 @@ import '../features/authentication/phone_auth/phone_auth_screen.dart';
 import '../features/home_screen/home.dart';
 import '../features/splash_screen/splash_screen.dart';
 import '../features/watch_ list_screen/watch_list.dart';
+import '../features/watched_list/watched_list.dart';
 import '../services/shared_preferences_services.dart';
 import 'logger.dart';
 
@@ -47,11 +48,12 @@ class AppRoute {
         screen = const SocialAuthenticationScreen();
         break;
 
- 
       case WatchList.path:
         screen = const WatchList();
         break;
-     
+      case WatchedList.path:
+        screen = const WatchedList();
+        break;
 
       default:
         return null;

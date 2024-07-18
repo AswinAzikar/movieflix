@@ -20,13 +20,14 @@ class _GenreChipsWidgetState extends State<GenreChipsWidget> {
     super.initState();
     _loadGenres();
   }
-
-  Future<void> _loadGenres() async {
+Future<void> _loadGenres() async {
     final genreMap = await DataRepository.i.getGenreMap();
-    setState(() {
-      _genreMap = genreMap;
-      _isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        _genreMap = genreMap;
+        _isLoading = false;
+      });
+    }
   }
 
   @override

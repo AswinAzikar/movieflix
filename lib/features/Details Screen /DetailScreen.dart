@@ -29,14 +29,17 @@ class _DetailScreenState extends State<DetailScreen> {
 
     FirestoreService.checkInWatchList(widget.result.id!).then(
       (value) {
-        _isInwatchList = value;
+        if (!value) return;
+        _isInwatchList = true;
         _isInwatchedList = false;
         setState(() {});
       },
     );
     FirestoreService.checkInWatchedList(widget.result.id!).then(
       (value) {
-        _isInwatchedList = value;
+        if (!value) return;
+
+        _isInwatchedList = true;
         _isInwatchList = false;
         setState(() {});
       },
@@ -179,10 +182,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                       .then(
                                     (value) {
                                       logSuccess(value);
-                                      setState(() {
-                                        _isInwatchList = true;
-                                        _isInwatchedList = false;
-                                      });
+                                      if (value)
+                                        setState(() {
+                                          _isInwatchList = true;
+                                          _isInwatchedList = false;
+                                        });
                                     },
                                   );
                                 });
@@ -207,11 +211,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                           widget.result)
                                       .then(
                                     (value) {
-                                      logSuccess(value);
-                                      setState(() {
-                                        _isInwatchedList = true;
-                                        _isInwatchList = false;
-                                      });
+                                      if (value)
+                                        setState(() {
+                                          _isInwatchedList = true;
+                                          _isInwatchList = false;
+                                        });
                                     },
                                   );
                                 });

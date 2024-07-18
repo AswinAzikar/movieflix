@@ -50,7 +50,7 @@ class _SearchScreenState extends State<SearchScreen> with SearchMixin {
 
       // Log details about the filtered items
       for (var item in filteredItems) {
-        print('Movie: ${item.title}, BackdropPath: ${item.backdropPath}');
+        print('Movie: ${item.title ?? item.originalTitle}, BackdropPath: ${item.backdropPath ?? item.posterPath}');
       }
 
       if (filteredItems.length < 20) {
@@ -89,7 +89,7 @@ class _SearchScreenState extends State<SearchScreen> with SearchMixin {
               controller: searchController,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
-                labelText: "Search for a movie or TV show",
+                labelText: "Search for a movie ",
                 border: OutlineInputBorder(),
               ),
             ),

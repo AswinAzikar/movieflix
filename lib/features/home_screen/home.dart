@@ -9,6 +9,7 @@ import '../../widgets/horizontal_slider_with_title.dart';
 import '../Details Screen /DetailScreen.dart';
 import '../searhScreen/search_screen.dart';
 import '../watch_ list_screen/watch_list.dart';
+import '../watched_list/watched_list.dart';
 import 'models/datamodel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -110,7 +111,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 leading: const Icon(Icons.remove_red_eye, color: Colors.red),
                 title: const Text("Watched list",
                     style: TextStyle(color: Colors.white)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, WatchedList.path);
+                },
               ),
               ListTile(
                 leading: const Icon(Icons.favorite, color: Colors.red),
