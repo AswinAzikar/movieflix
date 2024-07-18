@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movieflix/core/firestore_service.dart';
+import 'package:movieflix/features/Details%20Screen%20/DetailScreen.dart';
 
 import '../features/home_screen/models/datamodel.dart';
 
@@ -61,7 +62,9 @@ class MovieCard extends StatelessWidget {
           child: InkWell(
             splashColor: Colors.grey.withOpacity(0.5),
             onTap: () {
-              debugPrint('Card tapped1.');
+              DetailScreen(
+                result: movie,
+              );
             },
             child: SizedBox(
               width: double.infinity,
