@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movieflix/core/firestore_service.dart';
+import 'package:movieflix/exporter.dart';
 import 'package:movieflix/features/Details%20Screen%20/DetailScreen.dart';
 
 import '../features/home_screen/models/datamodel.dart';
@@ -28,13 +29,13 @@ class MovieCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(width: 0.1 * screenWidth),
-            Icon(Icons.delete),
-            Text("Delete"),
+            const Icon(Icons.delete),
+            const Text("Delete"),
           ],
         ),
       ),
       onDismissed: (DismissDirection direction) {
-        print('direction: $direction');
+        //   print('direction: $direction');
         FirestoreService.removeMovieFromlist(movie.id!, collection);
       },
       secondaryBackground: Container(
@@ -42,8 +43,8 @@ class MovieCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Icon(Icons.delete),
-            Text("Delete"),
+            const Icon(Icons.delete),
+            const Text("Delete"),
             SizedBox(width: 0.1 * screenWidth),
           ],
         ),
@@ -65,6 +66,7 @@ class MovieCard extends StatelessWidget {
               DetailScreen(
                 result: movie,
               );
+              logError("Movie card pressed!");
             },
             child: SizedBox(
               width: double.infinity,
@@ -80,7 +82,7 @@ class MovieCard extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 1,
                           blurRadius: 5,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
@@ -89,8 +91,9 @@ class MovieCard extends StatelessWidget {
                       imageUrl: '$baseUrl/${movie.posterPath}',
                       fit: BoxFit.fitHeight,
                       placeholder: (context, url) =>
-                          Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+                          const Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                   Expanded(
@@ -116,7 +119,7 @@ class MovieCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Row(
                             children: [
                               Text(
@@ -135,8 +138,8 @@ class MovieCard extends StatelessWidget {
                                 itemCount: 5,
                                 itemSize: 20,
                                 itemPadding:
-                                    EdgeInsets.symmetric(horizontal: 4.0),
-                                itemBuilder: (context, _) => Icon(
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                                itemBuilder: (context, _) => const Icon(
                                   Icons.star,
                                   color: Colors.amber,
                                 ),
@@ -162,8 +165,8 @@ class MovieCard extends StatelessWidget {
                                 itemCount: 5,
                                 itemSize: 20,
                                 itemPadding:
-                                    EdgeInsets.symmetric(horizontal: 4.0),
-                                itemBuilder: (context, _) => Icon(
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                                itemBuilder: (context, _) => const Icon(
                                   Icons.star,
                                   color: Colors.amber,
                                 ),

@@ -26,7 +26,7 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
-
+    debugPrint("Received movie: ${widget.result.toString()}");
     FirestoreService.checkInWatchList(widget.result.id!).then(
       (value) {
         if (!value) return;
@@ -48,6 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    logError(widget.result.title);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.height;
     print(_isInwatchList);

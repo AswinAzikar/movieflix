@@ -7,7 +7,7 @@ import 'package:movieflix/widgets/vertical_slider.dart';
 import '../home_screen/models/datamodel.dart';
 
 class SearchScreen extends StatefulWidget {
-  static const String path = "/search-screen";
+  static const String path = "/search_screen";
 
   const SearchScreen({super.key});
 
@@ -50,7 +50,8 @@ class _SearchScreenState extends State<SearchScreen> with SearchMixin {
 
       // Log details about the filtered items
       for (var item in filteredItems) {
-        print('Movie: ${item.title ?? item.originalTitle}, BackdropPath: ${item.backdropPath ?? item.posterPath}');
+        print(
+            'Movie: ${item.title ?? item.originalTitle}, BackdropPath: ${item.backdropPath ?? item.posterPath}');
       }
 
       if (filteredItems.length < 20) {
@@ -64,9 +65,6 @@ class _SearchScreenState extends State<SearchScreen> with SearchMixin {
       pagingController.error = error;
     }
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
