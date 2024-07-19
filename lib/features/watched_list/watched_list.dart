@@ -4,16 +4,16 @@ import 'package:movieflix/core/firestore_service.dart';
 import '../../widgets/moviecard.dart';
 import '../home_screen/models/moviedatamodel.dart';
 
-class WatchedList extends StatefulWidget {
+class MovieWatchedList extends StatefulWidget {
   static const String path = "/Watched_List";
 
-  const WatchedList({super.key});
+  const MovieWatchedList({super.key});
 
   @override
-  State<WatchedList> createState() => _WatchedListState();
+  State<MovieWatchedList> createState() => _WatchedListState();
 }
 
-class _WatchedListState extends State<WatchedList> {
+class _WatchedListState extends State<MovieWatchedList> {
   static const _pageSize = 10;
   final PagingController<int, Result> _pagingController =
       PagingController(firstPageKey: 1);

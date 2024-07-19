@@ -182,7 +182,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 icon: Icons.favorite,
                                 text: 'Add to watch list',
                                 onPressed: () {
-                                  FirestoreService.addMovieToWatchlist(
+                                  FirestoreService.addMovieTomovieWatchlist(
                                           widget.result)
                                       .then(
                                     (value) {

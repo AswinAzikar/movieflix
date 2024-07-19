@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: const Text("Watched list",
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
-                  Navigator.pushNamed(context, WatchedList.path);
+                  Navigator.pushNamed(context, MovieWatchedList.path);
                 },
               ),
               ListTile(
@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: const Text("Watch list",
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
-                  Navigator.pushNamed(context, WatchList.path);
+                  Navigator.pushNamed(context, MovieWatchList.path);
                 },
               ),
               ListTile(

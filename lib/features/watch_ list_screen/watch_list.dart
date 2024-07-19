@@ -4,16 +4,16 @@ import 'package:movieflix/core/firestore_service.dart';
 import '../../widgets/moviecard.dart';
 import '../home_screen/models/moviedatamodel.dart';
 
-class WatchList extends StatefulWidget {
+class MovieWatchList extends StatefulWidget {
   static const String path = "/Watch_List";
 
-  const WatchList({Key? key}) : super(key: key);
+  const MovieWatchList({Key? key}) : super(key: key);
 
   @override
-  State<WatchList> createState() => _WatchListState();
+  State<MovieWatchList> createState() => _MovieWatchListState();
 }
 
-class _WatchListState extends State<WatchList> {
+class _MovieWatchListState extends State<MovieWatchList> {
   static const _pageSize = 10;
   final PagingController<int, Result> _pagingController =
       PagingController(firstPageKey: 1);
@@ -53,7 +53,10 @@ class _WatchListState extends State<WatchList> {
       body: PagedListView<int, Result>(
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Result>(
-          itemBuilder: (context, item, index) => MovieCard(movie: item,collection: 'watchlist',),
+          itemBuilder: (context, item, index) => MovieCard(
+            movie: item,
+            collection: 'MovieWatchList',
+          ),
         ),
         scrollDirection: Axis.vertical,
       ),

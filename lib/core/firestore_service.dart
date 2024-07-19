@@ -7,11 +7,11 @@ class FirestoreService {
   static final FirebaseFirestore db = FirebaseFirestore.instance;
 
   static final userId = FirebaseAuth.instance.currentUser?.uid;
-  static final CollectionReference watchlist = db.collection("watchlist");
+  static final CollectionReference moviewatchlist = db.collection("moviewatchlist");
 
-  static final CollectionReference watchedlist = db.collection('watchedlist');
+  static final CollectionReference moviewatchedlist = db.collection('moviewatchedlist');
   static Future<List<Result>> fetchWatchListMovies() {
-    return watchlist.doc(userId).get().then(
+    return moviewatchlist.doc(userId).get().then(
       (value) {
         final data = value.data() == null
             ? null
@@ -28,7 +28,7 @@ class FirestoreService {
   }
 
   static Future<List<Result>> fetchWatchedListMovies() {
-    return watchedlist.doc(userId).get().then(
+    return moviewatchedlist.doc(userId).get().then(
       (value) {
         final data = value.data() == null
             ? null
@@ -44,7 +44,7 @@ class FirestoreService {
     );
   }
 
-  static Future<bool> addMovieToWatchlist(Result result) async {
+  static Future<bool> addMovieTomovieWatchlist(Result result) async {
     try {
       // await watchedlist
       //     .doc(userId)
@@ -52,7 +52,7 @@ class FirestoreService {
       final movies = await fetchWatchListMovies();
       movies.add(result);
 
-      await watchlist.doc(userId).set({
+      await moviewatchlist.doc(userId).set({
         'movies': movies
             .map(
               (e) => e.toMap(),
@@ -62,7 +62,7 @@ class FirestoreService {
 
       final watchedListMovies = await fetchWatchedListMovies();
       watchedListMovies.removeWhere((element) => element.id == result.id);
-      await watchedlist.doc(userId).set({
+      await moviewatchedlist.doc(userId).set({
         'movies': watchedListMovies
             .map(
               (e) => e.toMap(),
@@ -83,7 +83,7 @@ class FirestoreService {
       movies.add(result);
 
       logError(movies);
-      await watchedlist.doc(userId).set({
+      await moviewatchedlist.doc(userId).set({
         'movies': movies
             .map(
               (e) => e.toMap(),
@@ -93,7 +93,7 @@ class FirestoreService {
 
       final watchListMovies = await fetchWatchListMovies();
       watchListMovies.removeWhere((element) => element.id == result.id);
-      await watchlist.doc(userId).set({
+      await moviewatchlist.doc(userId).set({
         'movies': watchListMovies
             .map(
               (e) => e.toMap(),
@@ -115,7 +115,7 @@ class FirestoreService {
         final watchListMovies = await fetchWatchListMovies();
         watchListMovies.removeWhere((element) => element.id == movieId);
 
-        await watchlist.doc(userId).set({
+        await moviewatchlist.doc(userId).set({
           'movies': watchListMovies
               .map(
                 (e) => e.toMap(),
@@ -126,7 +126,7 @@ class FirestoreService {
         final watchedListMovies = await fetchWatchedListMovies();
         watchedListMovies.removeWhere((element) => element.id == movieId);
 
-        await watchedlist.doc(userId).set({
+        await moviewatchedlist.doc(userId).set({
           'movies': watchedListMovies
               .map(
                 (e) => e.toMap(),
@@ -151,7 +151,7 @@ class FirestoreService {
 
   static Future<List<Result>> gatherMoviesForWatchListPage(
       int page, int pageSize) async {
-    return watchlist.doc(userId).get().then(
+    return moviewatchlist.doc(userId).get().then(
       (value) {
         final data = value.data() == null
             ? null
@@ -176,7 +176,7 @@ class FirestoreService {
 
   static Future<List<Result>> gatherMoviesForWatchedListPage(
       int page, int pageSize) async {
-    return watchedlist.doc(userId).get().then(
+    return moviewatchedlist.doc(userId).get().then(
       (value) {
         final data = value.data() == null
             ? null
