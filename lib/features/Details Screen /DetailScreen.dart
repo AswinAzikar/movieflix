@@ -10,6 +10,8 @@ import '../../widgets/chip_labels.dart';
 import '../home_screen/models/datamodel.dart';
 
 class DetailScreen extends StatefulWidget {
+    static const String path = "/Detail_Screen";
+
   const DetailScreen({super.key, required this.result});
 
   final Result result;
@@ -19,6 +21,8 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+
+
   final ScrollController _scrollController = ScrollController();
   bool _isInwatchList = false;
   bool _isInwatchedList = false;

@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:movieflix/features/Details%20Screen%20/DetailScreen.dart';
 import 'package:movieflix/features/authentication/social_authentication/social_authentication_screen.dart';
 import 'package:movieflix/features/searhScreen/search_screen.dart';
 
@@ -8,6 +9,7 @@ import '../constants.dart';
 import '../features/authentication/landing_screen/landing_screen.dart';
 import '../features/authentication/phone_auth/phone_auth_screen.dart';
 import '../features/home_screen/home.dart';
+import '../features/home_screen/models/datamodel.dart';
 import '../features/splash_screen/splash_screen.dart';
 import '../features/watch_ list_screen/watch_list.dart';
 import '../features/watched_list/watched_list.dart';
@@ -31,7 +33,7 @@ class AppRoute {
     ];
   }
 
-  static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+  static Route<dynamic>? onGenerateRoute(RouteSettings settings,) {
     logInfo(settings.name);
     Uri uri = Uri.parse(settings.name ?? "");
     final Widget screen;
@@ -56,9 +58,14 @@ class AppRoute {
         screen = const WatchedList();
         break;
 
+
+
       case SearchScreen.path:
         screen = const SearchScreen();
       default:
+
+
+
         return null;
     }
     return pageRoute(settings, screen);
