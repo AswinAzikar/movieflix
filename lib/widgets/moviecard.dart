@@ -6,7 +6,7 @@ import 'package:movieflix/core/firestore_service.dart';
 import 'package:movieflix/exporter.dart';
 import 'package:movieflix/features/Details%20Screen%20/DetailScreen.dart';
 
-import '../features/home_screen/models/datamodel.dart';
+import '../features/home_screen/models/moviedatamodel.dart';
 
 class MovieCard extends StatelessWidget {
   final Result movie;

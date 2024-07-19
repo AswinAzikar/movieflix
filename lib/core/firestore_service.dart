@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:movieflix/exporter.dart';
-import 'package:movieflix/features/home_screen/models/datamodel.dart';
+import 'package:movieflix/features/home_screen/models/moviedatamodel.dart';
 
 class FirestoreService {
   static final FirebaseFirestore db = FirebaseFirestore.instance;

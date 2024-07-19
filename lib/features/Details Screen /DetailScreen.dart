@@ -7,7 +7,7 @@ import 'package:movieflix/exporter.dart';
 import 'package:movieflix/widgets/watchlistbutton.dart';
 
 import '../../widgets/chip_labels.dart';
-import '../home_screen/models/datamodel.dart';
+import '../home_screen/models/moviedatamodel.dart';
 
 class DetailScreen extends StatefulWidget {
     static const String path = "/Detail_Screen";

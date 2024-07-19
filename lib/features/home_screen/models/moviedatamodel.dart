@@ -1,23 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-ModelClass modelClassFromJson(String str) =>
-    ModelClass.fromJson(json.decode(str));
+MovieModelClass MovieModelClassFromJson(String str) =>
+    MovieModelClass.fromJson(json.decode(str));
 
-class ModelClass {
+class MovieModelClass{
   final int? page;
   final List<Result>? results;
   final int? totalPages;
   final int? totalResults;
 
-  ModelClass({
+  MovieModelClass({
     this.page,
     this.results,
     this.totalPages,
     this.totalResults,
   });
 
-  factory ModelClass.fromJson(Map<String, dynamic> json) => ModelClass(
+  factory MovieModelClass.fromJson(Map<String, dynamic> json) => MovieModelClass(
         page: json["page"],
         results: json["results"] == null
             ? []
@@ -131,3 +131,88 @@ class EnumValues<T> {
     return reverseMap ??= map.map((k, v) => MapEntry(v, k));
   }
 }
+class TvShow {
+  final String backdropPath;
+  final int id;
+  final String title;
+  final String originalName;
+  final String overview;
+  final String posterPath;
+  final String mediaType;
+  final bool adult;
+  final String originalLanguage;
+  final List<int> genreIds;
+  final double popularity;
+  final String firstAirDate;
+  final double voteAverage;
+  final int voteCount;
+  final List<String> originCountry;
+
+  TvShow({
+    required this.backdropPath,
+    required this.id,
+    required this.title,
+    required this.originalName,
+    required this.overview,
+    required this.posterPath,
+    required this.mediaType,
+    required this.adult,
+    required this.originalLanguage,
+    required this.genreIds,
+    required this.popularity,
+    required this.firstAirDate,
+    required this.voteAverage,
+    required this.voteCount,
+    required this.originCountry,
+  });
+
+  // Factory constructor for creating a new `TvShow` instance from a map.
+  factory TvShow.fromJson(Map<String, dynamic> json) {
+    return TvShow(
+      backdropPath: json['backdrop_path'] as String? ?? '',
+      id: json['id'] as int? ?? 0,
+      title: json['name'] as String? ?? '',
+      originalName: json['original_name'] as String? ?? '',
+      overview: json['overview'] as String? ?? '',
+      posterPath: json['poster_path'] as String? ?? '',
+      mediaType: json['media_type'] as String? ?? '',
+      adult: json['adult'] as bool? ?? false,
+      originalLanguage: json['original_language'] as String? ?? '',
+      genreIds: (json['genre_ids'] as List<dynamic>?)
+              ?.map((item) => item as int)
+              .toList() ??
+          [],
+      popularity: (json['popularity'] as num?)?.toDouble() ?? 0.0,
+      firstAirDate: json['first_air_date'] as String? ?? '',
+      voteAverage: (json['vote_average'] as num?)?.toDouble() ?? 0.0,
+      voteCount: json['vote_count'] as int? ?? 0,
+      originCountry: (json['origin_country'] as List<dynamic>?)
+              ?.map((item) => item as String)
+              .toList() ??
+          [],
+    );
+  }
+
+  // Method for converting a `TvShow` instance to a map.
+  Map<String, dynamic> toJson() {
+    return {
+      'backdrop_path': backdropPath,
+      'id': id,
+      'name': title,
+      'original_name': originalName,
+      'overview': overview,
+      'poster_path': posterPath,
+      'media_type': mediaType,
+      'adult': adult,
+      'original_language': originalLanguage,
+      'genre_ids': genreIds,
+      'popularity': popularity,
+      'first_air_date': firstAirDate,
+      'vote_average': voteAverage,
+      'vote_count': voteCount,
+      'origin_country': originCountry,
+    };
+  }
+}
+
+

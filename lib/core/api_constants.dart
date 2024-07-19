@@ -9,6 +9,6 @@ class APIConstants {
   static String upComingMovies = "movie/upcoming";
   static String genre = "genre/movie/list";
   static String search = "search/movie";
- 
-
+ static String tv ="trending/tv/day"
+;
 }

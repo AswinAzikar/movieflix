@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:movieflix/core/firestore_service.dart';
 import '../../widgets/moviecard.dart';
-import '../home_screen/models/datamodel.dart';
+import '../home_screen/models/moviedatamodel.dart';
 
 class WatchedList extends StatefulWidget {
   static const String path = "/Watched_List";

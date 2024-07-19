@@ -5,22 +5,20 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:movieflix/core/repository.dart';
 
 import '../features/Details Screen /DetailScreen.dart';
-import '../features/home_screen/models/datamodel.dart';
+import '../features/home_screen/models/moviedatamodel.dart';
 
-class HorizontalSliderWithTitle extends StatefulWidget {
-  const HorizontalSliderWithTitle({
-    super.key,
-    required this.title,
-  });
+class HorizontalSliderWithTitleforTvShows extends StatefulWidget {
+  const HorizontalSliderWithTitleforTvShows({super.key, required this.title});
 
   final String title;
 
   @override
-  State<HorizontalSliderWithTitle> createState() =>
-      _HorizontalSliderWithTitleState();
+  State<HorizontalSliderWithTitleforTvShows> createState() =>
+      _HorizontalSliderWithTitleforMoviesState();
 }
 
-class _HorizontalSliderWithTitleState extends State<HorizontalSliderWithTitle> {
+class _HorizontalSliderWithTitleforMoviesState
+    extends State<HorizontalSliderWithTitleforTvShows> {
   late int page;
   late String sectionName;
 
@@ -36,7 +34,10 @@ class _HorizontalSliderWithTitleState extends State<HorizontalSliderWithTitle> {
       PagingController(firstPageKey: 1);
 
   Future<void> fetchPage(int pageKey) async {
-    final items = await DataRepository.i.fetchMovies(pageKey, widget.title);
+    final dynamic items;
+
+    items = await DataRepository.i.fetchTvShows(pageKey);
+
     if (items.length < 20) {
       pagingController.appendLastPage(items);
     } else {

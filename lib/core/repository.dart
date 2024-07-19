@@ -2,8 +2,9 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:movieflix/exporter.dart';
 import 'package:movieflix/features/authentication/phone_auth/phone_auth_mixin.dart';
+import 'package:movieflix/features/home_screen/models/tvdatamodel.dart';
 import 'package:movieflix/features/splash_screen/models/Genre_model.dart';
-import '../features/home_screen/models/datamodel.dart';
+import '../features/home_screen/models/moviedatamodel.dart';
 import '../features/profile_screen/profile_details_model.dart';
 import 'api_constants.dart';
 import 'app_config.dart';
@@ -30,7 +31,7 @@ class DataRepository with ErrorExceptionHandler {
     _client.interceptors.add(LoggingInterceptor());
   }
 
-  Future<ModelClass?> fetchTrending(int page) async {
+  Future<MovieModelClass?> fetchTrending(int page) async {
     try {
       var response =
           await _client.get(APIConstants.popularMovies, queryParameters: {
@@ -38,11 +39,27 @@ class DataRepository with ErrorExceptionHandler {
         "page": page,
       });
 
-      ModelClass modelClass = ModelClass.fromJson(response.data);
+      MovieModelClass modelClass = MovieModelClass.fromJson(response.data);
 
       return modelClass;
     } catch (e) {
       print("Error: $e");
+    }
+    return null;
+  }
+
+  Future<TvModelClass?> fetchTvShows(int page) async {
+    try {
+      var response = await _client.get(APIConstants.tv, queryParameters: {
+        "language": "en-US",
+        "page": page,
+      });
+
+      TvModelClass tvmodelClass = TvModelClass.fromJson(response.data);
+
+      return tvmodelClass;
+    } catch (e) {
+      logError("Error: $e");
     }
     return null;
   }
@@ -65,7 +82,7 @@ class DataRepository with ErrorExceptionHandler {
       });
 
       if (response.statusCode == 200) {
-        ModelClass modelClass = ModelClass.fromJson(response.data);
+        MovieModelClass modelClass = MovieModelClass.fromJson(response.data);
         return modelClass.results!;
       } else {
         throw Exception('Failed to load $sectionName');
@@ -121,12 +138,12 @@ class DataRepository with ErrorExceptionHandler {
     try {
       var response = await _client.get(APIConstants.search, queryParameters: {
         // "language": "en-US",
-         "query": query,
+        "query": query,
         // "page": pagekey
       });
 
       if (response.statusCode == 200) {
-        ModelClass modelClass = ModelClass.fromJson(response.data);
+        MovieModelClass modelClass = MovieModelClass.fromJson(response.data);
         return modelClass.results!;
       } else {
         throw Exception('Failed to load $query');

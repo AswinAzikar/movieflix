@@ -4,7 +4,7 @@ import 'package:movieflix/core/repository.dart';
 import 'package:movieflix/exporter.dart';
 import 'package:movieflix/mixins/search_mixin.dart';
 import 'package:movieflix/widgets/vertical_slider.dart';
-import '../home_screen/models/datamodel.dart';
+import '../home_screen/models/moviedatamodel.dart';
 
 class SearchScreen extends StatefulWidget {
   static const String path = "/search_screen";

@@ -9,7 +9,7 @@ import '../constants.dart';
 import '../features/authentication/landing_screen/landing_screen.dart';
 import '../features/authentication/phone_auth/phone_auth_screen.dart';
 import '../features/home_screen/home.dart';
-import '../features/home_screen/models/datamodel.dart';
+import '../features/home_screen/models/moviedatamodel.dart';
 import '../features/splash_screen/splash_screen.dart';
 import '../features/watch_ list_screen/watch_list.dart';
 import '../features/watched_list/watched_list.dart';

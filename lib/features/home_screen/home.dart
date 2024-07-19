@@ -5,12 +5,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:movieflix/core/repository.dart';
-import '../../widgets/horizontal_slider_with_title.dart';
+import '../../widgets/horizontal_movie_slider_with_title_.dart';
 import '../Details Screen /DetailScreen.dart';
 import '../searhScreen/search_screen.dart';
 import '../watch_ list_screen/watch_list.dart';
 import '../watched_list/watched_list.dart';
-import 'models/datamodel.dart';
+import 'models/moviedatamodel.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String path = "/home-screen";
@@ -240,14 +240,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                 SizedBox(height: 0.05 * screenHeight),
-                const HorizontalSliderWithTitle(
+                const HorizontalSliderWithTitleforMovies(
                   title: "Now Playing",
                 ),
                 SizedBox(height: 0.05 * screenHeight),
-                const HorizontalSliderWithTitle(
+                const HorizontalSliderWithTitleforMovies(
                   title: "Top Rated Movies",
                 ),
-                const HorizontalSliderWithTitle(
+                const HorizontalSliderWithTitleforMovies(
                   title: "Upcoming Movies",
                 ),
                 SizedBox(height: 0.05 * screenHeight),
