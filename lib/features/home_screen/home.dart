@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:movieflix/core/repository.dart';
+import 'package:movieflix/widgets/horizontal_tv_slider_with_title.dart';
 import '../../widgets/horizontal_movie_slider_with_title_.dart';
 import '../Details Screen /DetailScreen.dart';
 import '../searhScreen/search_screen.dart';
@@ -249,6 +250,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const HorizontalSliderWithTitleforMovies(
                   title: "Upcoming Movies",
+                ),
+                SizedBox(height: 0.05 * screenHeight),
+                const HorizontalSliderWithTitleforTvShows(
+                  title: "Tv shows and Web series",
                 ),
                 SizedBox(height: 0.05 * screenHeight),
               ],

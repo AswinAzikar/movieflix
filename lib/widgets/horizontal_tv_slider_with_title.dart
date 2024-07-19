@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:movieflix/core/repository.dart';
-
-import '../features/Details Screen /DetailScreen.dart';
-import '../features/home_screen/models/moviedatamodel.dart';
+import 'package:movieflix/exporter.dart';
+import 'package:movieflix/features/home_screen/models/tvdatamodel.dart';
 
 class HorizontalSliderWithTitleforTvShows extends StatefulWidget {
   const HorizontalSliderWithTitleforTvShows({super.key, required this.title});
@@ -30,18 +29,20 @@ class _HorizontalSliderWithTitleforMoviesState
     });
   }
 
-  final PagingController<int, Result> pagingController =
+  final PagingController<int, TvModelClass> pagingController =
       PagingController(firstPageKey: 1);
 
   Future<void> fetchPage(int pageKey) async {
-    final dynamic items;
-
-    items = await DataRepository.i.fetchTvShows(pageKey);
-
-    if (items.length < 20) {
-      pagingController.appendLastPage(items);
-    } else {
-      pagingController.appendPage(items, pageKey + 1);
+    try {
+      final items = await DataRepository.i.fetchTvShows(pageKey);
+      logError(items);
+      if (items.length < 20) {
+        pagingController.appendLastPage(items);
+      } else {
+        pagingController.appendPage(items, pageKey + 1);
+      }
+    } catch (e) {
+      logError("Error is $e");
     }
   }
 
@@ -69,19 +70,19 @@ class _HorizontalSliderWithTitleforMoviesState
         const SizedBox(height: 10),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.3,
-          child: PagedListView<int, Result>(
+          child: PagedListView<int, TvModelClass>(
             scrollDirection: Axis.horizontal,
             pagingController: pagingController,
-            builderDelegate: PagedChildBuilderDelegate<Result>(
+            builderDelegate: PagedChildBuilderDelegate<TvModelClass>(
               itemBuilder: (context, item, index) {
                 final imageUrl =
                     'https://image.tmdb.org/t/p/w500${item.posterPath}';
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailScreen(result: item)));
+                    // );Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => DetailScreen(TvModelClass: item))
                   },
                   child: AspectRatio(
                     aspectRatio: .7,
@@ -103,7 +104,7 @@ class _HorizontalSliderWithTitleforMoviesState
                             ),
                           ),
                         ),
-                        Text(item.title ?? "")
+                        Text(item.name ?? "")
                       ],
                     ),
                   ),

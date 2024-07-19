@@ -48,20 +48,20 @@ class DataRepository with ErrorExceptionHandler {
     return null;
   }
 
-  Future<TvModelClass?> fetchTvShows(int page) async {
+  Future<List<TvModelClass>> fetchTvShows(int page) async {
     try {
       var response = await _client.get(APIConstants.tv, queryParameters: {
         "language": "en-US",
         "page": page,
       });
-
-      TvModelClass tvmodelClass = TvModelClass.fromJson(response.data);
-
-      return tvmodelClass;
+      return (response.data["results"] as List)
+          .map(
+            (e) => TvModelClass.fromJson(e),
+          )
+          .toList();
     } catch (e) {
-      logError("Error: $e");
+      throw e;
     }
-    return null;
   }
 
   Future<List<Result>> fetchMovies(int page, String sectionName) async {
