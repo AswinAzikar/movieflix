@@ -33,7 +33,9 @@ class AppRoute {
     ];
   }
 
-  static Route<dynamic>? onGenerateRoute(RouteSettings settings,) {
+  static Route<dynamic>? onGenerateRoute(
+    RouteSettings settings,
+  ) {
     logInfo(settings.name);
     Uri uri = Uri.parse(settings.name ?? "");
     final Widget screen;
@@ -51,21 +53,16 @@ class AppRoute {
         screen = const SocialAuthenticationScreen();
         break;
 
-      case WatchList.path:
-        screen = const WatchList();
+      case MovieWatchList.path:
+        screen = const MovieWatchList();
         break;
-      case WatchedList.path:
-        screen = const WatchedList();
+      case MovieWatchedList.path:
+        screen = const MovieWatchedList();
         break;
-
-
 
       case SearchScreen.path:
         screen = const SearchScreen();
       default:
-
-
-
         return null;
     }
     return pageRoute(settings, screen);
