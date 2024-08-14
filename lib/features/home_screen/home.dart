@@ -16,7 +16,7 @@ import 'models/moviedatamodel.dart';
 class HomeScreen extends StatefulWidget {
   static const String path = "/home-screen";
 
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -24,7 +24,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   ScrollController scrollController = ScrollController();
-  CarouselController carouselController = CarouselController();
+  CarouselSliderController carouselSliderController =
+      CarouselSliderController();
   List<Result> trending = [];
 
   int offset = 1;
@@ -176,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? const Center(child: CircularProgressIndicator())
                     : SizedBox(
                         child: CarouselSlider.builder(
-                          carouselController: carouselController,
+                          carouselController: carouselSliderController,
                           itemCount: trending.length,
                           options: CarouselOptions(
                             aspectRatio: 1,
