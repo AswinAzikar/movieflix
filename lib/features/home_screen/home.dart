@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int offset = 1;
   int toprated_offset = 1;
   int currentPage = 1;
+  bool _isDarkMode = true;
 
   bool isLoading = true;
 
@@ -47,6 +48,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  _isDarkMode = !_isDarkMode;
+                });
+              },
+              icon: _isDarkMode
+                  ? const Icon(
+                      Icons.brightness_7_rounded,
+                      color: Colors.amber,
+                    )
+                  : const Icon(Icons.brightness_2_rounded,
+                      color: Color.fromARGB(255, 157, 178, 196))),
+        ],
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Image.asset(
@@ -59,98 +75,95 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(
         elevation: 2,
         backgroundColor: Colors.transparent,
-        child: Container(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: Stack(
-                  children: [
-                    BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                      child: const SizedBox(
-                        height: double.infinity,
-                        width: double.infinity,
-                      ),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Stack(
+                children: [
+                  BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: const SizedBox(
+                      height: double.infinity,
+                      width: double.infinity,
                     ),
-                    Image.asset(
-                      "assets/appicon/logo.png",
-                      height: 80,
-                      width: 80,
+                  ),
+                  Image.asset(
+                    "assets/appicon/logo.png",
+                    height: 80,
+                    width: 80,
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "MovieFlix",
+                    style: TextStyle(
+                      color: Colors.transparent,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "MovieFlix",
-                      style: TextStyle(
-                        color: Colors.transparent,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              ListTile(
-                leading: const Icon(
-                  Icons.home,
-                  color: Colors.red,
-                ),
-                title:
-                    const Text("Home", style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.pop(context); // Close the drawer
-                },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.home,
+                color: Colors.red,
               ),
-              ListTile(
-                leading: const Icon(Icons.search, color: Colors.red),
-                title:
-                    const Text("Search", style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.pushNamed(context, SearchScreen.path);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.remove_red_eye, color: Colors.red),
-                title: const Text("Watched list",
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.pushNamed(context, MovieWatchedList.path);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.favorite, color: Colors.red),
-                title: const Text("Watch list",
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.pushNamed(context, MovieWatchList.path);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.movie, color: Colors.red),
-                title:
-                    const Text("Movies", style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.pushNamed(context, HomeScreen.path);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.tv, color: Colors.red),
-                title: const Text("TV Shows",
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Navigate to TV shows screen
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings, color: Colors.red),
-                title: const Text("Settings",
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  // Navigate to settings screen
-                },
-              ),
-            ],
-          ),
+              title: const Text("Home", style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.search, color: Colors.red),
+              title:
+                  const Text("Search", style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pushNamed(context, SearchScreen.path);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.remove_red_eye, color: Colors.red),
+              title: const Text("Watched list",
+                  style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pushNamed(context, MovieWatchedList.path);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.favorite, color: Colors.red),
+              title: const Text("Watch list",
+                  style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pushNamed(context, MovieWatchList.path);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.movie, color: Colors.red),
+              title:
+                  const Text("Movies", style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pushNamed(context, HomeScreen.path);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.tv, color: Colors.red),
+              title:
+                  const Text("TV Shows", style: TextStyle(color: Colors.white)),
+              onTap: () {
+                // Navigate to TV shows screen
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings, color: Colors.red),
+              title:
+                  const Text("Settings", style: TextStyle(color: Colors.white)),
+              onTap: () {
+                // Navigate to settings screen
+              },
+            ),
+          ],
         ),
       ),
       body: RefreshIndicator(
