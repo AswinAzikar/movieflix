@@ -4,13 +4,14 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movieflix/core/firestore_service.dart';
 import 'package:movieflix/exporter.dart';
+import 'package:movieflix/widgets/loading_button.dart';
 import 'package:movieflix/widgets/watchlistbutton.dart';
 
 import '../../widgets/chip_labels.dart';
 import '../home_screen/models/moviedatamodel.dart';
 
 class DetailScreen extends StatefulWidget {
-    static const String path = "/Detail_Screen";
+  static const String path = "/Detail_Screen";
 
   const DetailScreen({super.key, required this.result});
 
@@ -21,8 +22,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-
-
+  bool _playButtonTapped = false;
   final ScrollController _scrollController = ScrollController();
   bool _isInwatchList = false;
   bool _isInwatchedList = false;
@@ -164,6 +164,49 @@ class _DetailScreenState extends State<DetailScreen> {
                     children: [
                       GenreChipsWidget(genreIds: widget.result.genreIds ?? []),
                       SizedBox(height: 0.04 * screenHeight),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            _playButtonTapped = !_playButtonTapped;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 50),
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: _playButtonTapped
+                                ? const Color.fromARGB(223, 201, 38, 9)
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(40),
+                            boxShadow: _playButtonTapped
+                                ? [
+                                    const BoxShadow(
+                                        color: Colors.black26, blurRadius: 10)
+                                  ]
+                                : [],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.play_circle_outline_outlined,
+                                color: _playButtonTapped
+                                    ? Colors.white
+                                    : const Color.fromARGB(223, 201, 38, 9),
+                              ),
+                              const SizedBox(width: 8), // Replaces `gap`
+                              Text(
+                                "Play",
+                                style: TextStyle(
+                                    color: _playButtonTapped
+                                        ? Colors.white
+                                        : Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      gapLarge,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -171,11 +214,12 @@ class _DetailScreenState extends State<DetailScreen> {
                             if (_isInwatchList) {
                               return TextButton.icon(
                                 onPressed: () {},
-                                label: Text(
+                                label: const Text(
                                   "Added to watch list",
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                icon: Icon(Icons.done, color: Colors.green),
+                                icon:
+                                    const Icon(Icons.done, color: Colors.green),
                               );
                             }
                             return WatchlistButton(
@@ -187,11 +231,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                       .then(
                                     (value) {
                                       logSuccess(value);
-                                      if (value)
+                                      if (value) {
                                         setState(() {
                                           _isInwatchList = true;
                                           _isInwatchedList = false;
                                         });
+                                      }
                                     },
                                   );
                                 });
@@ -201,11 +246,12 @@ class _DetailScreenState extends State<DetailScreen> {
                             if (_isInwatchedList) {
                               return TextButton.icon(
                                 onPressed: () {},
-                                label: Text(
+                                label: const Text(
                                   "Added to watched list",
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                icon: Icon(Icons.done, color: Colors.green),
+                                icon:
+                                    const Icon(Icons.done, color: Colors.green),
                               );
                             }
                             return WatchlistButton(
@@ -216,11 +262,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                           widget.result)
                                       .then(
                                     (value) {
-                                      if (value)
+                                      if (value) {
                                         setState(() {
                                           _isInwatchedList = true;
                                           _isInwatchList = false;
                                         });
+                                      }
                                     },
                                   );
                                 });

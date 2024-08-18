@@ -10,7 +10,8 @@ class WatchlistButton extends StatelessWidget {
 
   // final player = AudioPlayer();
 
-  WatchlistButton({
+  const WatchlistButton({
+    super.key,
     required this.icon,
     required this.text,
     required this.onPressed,
@@ -33,18 +34,18 @@ class WatchlistButton extends StatelessWidget {
             onPressed();
           },
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Icon(
                   icon,
-                  color: Color.fromARGB(223, 201, 38, 9),
+                  color: const Color.fromARGB(223, 201, 38, 9),
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 2),
                 Text(
                   text,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 13,
                     color: Colors.grey,
                   ),

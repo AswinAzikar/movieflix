@@ -35,6 +35,12 @@ mixin GoogleOauthMixin<T extends StatefulWidget> on State<T> {
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await _googleSignIn.signIn();
+      if (googleSignInAccount == null) {
+        logError("googleSignInAccount return null");
+      } else {
+        logSuccess(
+            "googleSignInAccount is not null, user is ${googleSignInAccount.email}");
+      }
 
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount!.authentication;
@@ -53,7 +59,7 @@ mixin GoogleOauthMixin<T extends StatefulWidget> on State<T> {
           context, SplashScreen.path, (route) => false);
     } catch (error) {
       makeButtonNotLoading();
-      logInfo(error);
+      logError("the Error is $error");
     }
   }
 
