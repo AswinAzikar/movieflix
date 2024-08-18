@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/utils.dart';
 
-ThemeData get themeData => ThemeData.dark().copyWith(
+ThemeData get themeDataDark => ThemeData.dark().copyWith(
       scaffoldBackgroundColor: Colors.black,
       // elevatedButtonTheme: ElevatedButtonThemeData(
       //   style: ElevatedButton.styleFrom(
@@ -60,3 +60,14 @@ setSystemOverlay() {
 RoundedRectangleBorder bottomSheetShape() {
   return const RoundedRectangleBorder();
 }
+
+
+
+
+
+
+
+ThemeData get themeDatalight => ThemeData.light().copyWith(
+      scaffoldBackgroundColor: Colors.white,
+      // Add any specific light theme overrides here
+    );

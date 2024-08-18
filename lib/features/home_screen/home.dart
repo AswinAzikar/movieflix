@@ -5,7 +5,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:movieflix/core/repository.dart';
+import 'package:movieflix/theme/theme_provider.dart';
 import 'package:movieflix/widgets/horizontal_tv_slider_with_title.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/horizontal_movie_slider_with_title_.dart';
 import '../Details Screen /DetailScreen.dart';
 import '../searhScreen/search_screen.dart';
@@ -31,8 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int offset = 1;
   int toprated_offset = 1;
   int currentPage = 1;
-  bool _isDarkMode = true;
-
+  final bool _isDarkMode = true;
   bool isLoading = true;
 
   @override
@@ -50,18 +51,20 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         actions: [
           IconButton(
-              onPressed: () {
-                setState(() {
-                  _isDarkMode = !_isDarkMode;
-                });
-              },
-              icon: _isDarkMode
-                  ? const Icon(
-                      Icons.brightness_7_rounded,
-                      color: Colors.amber,
-                    )
-                  : const Icon(Icons.brightness_2_rounded,
-                      color: Color.fromARGB(255, 157, 178, 196))),
+            onPressed: () {
+              Provider.of<ThemeProvider>(context, listen: false).changeTheme();
+            },
+            icon: Consumer<ThemeProvider>(
+              builder: (context, themeProvider, child) =>
+                  themeProvider.isDarkMode
+                      ? const Icon(
+                          Icons.light_mode,
+                          color: Colors.amber,
+                        )
+                      : const Icon(Icons.nightlight_round,
+                          color: Color.fromARGB(255, 10, 25, 37)),
+            ),
+          ),
         ],
         backgroundColor: Colors.transparent,
         elevation: 0,
