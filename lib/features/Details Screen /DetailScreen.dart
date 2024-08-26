@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movieflix/core/firestore_service.dart';
 import 'package:movieflix/exporter.dart';
+import 'package:movieflix/features/VideoPlayerScreen/video_player.dart';
 import 'package:movieflix/widgets/loading_button.dart';
 import 'package:movieflix/widgets/watchlistbutton.dart';
 
@@ -168,6 +169,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         onTap: () {
                           setState(() {
                             _playButtonTapped = !_playButtonTapped;
+                       
                           });
                         },
                         child: AnimatedContainer(

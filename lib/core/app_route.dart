@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movieflix/features/Details%20Screen%20/DetailScreen.dart';
+import 'package:movieflix/features/VideoPlayerScreen/video_player.dart';
 import 'package:movieflix/features/authentication/social_authentication/social_authentication_screen.dart';
 import 'package:movieflix/features/searhScreen/search_screen.dart';
 
@@ -52,6 +53,7 @@ class AppRoute {
       case SocialAuthenticationScreen.path:
         screen = const SocialAuthenticationScreen();
         break;
+      
 
       case MovieWatchList.path:
         screen = const MovieWatchList();
