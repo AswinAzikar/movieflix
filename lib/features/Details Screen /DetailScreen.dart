@@ -169,7 +169,12 @@ class _DetailScreenState extends State<DetailScreen> {
                         onTap: () {
                           setState(() {
                             _playButtonTapped = !_playButtonTapped;
-                       
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    VideoPlayer(id: widget.result.id!),
+                              ),
+                            );
                           });
                         },
                         child: AnimatedContainer(

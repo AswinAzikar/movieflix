@@ -55,6 +55,8 @@ class AppRoute {
         break;
       
 
+
+
       case MovieWatchList.path:
         screen = const MovieWatchList();
         break;

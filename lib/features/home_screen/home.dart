@@ -53,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             onPressed: () {
               Provider.of<ThemeProvider>(context, listen: false).changeTheme();
+              
             },
             icon: Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) =>
